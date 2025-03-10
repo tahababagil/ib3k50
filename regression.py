@@ -34,8 +34,5 @@ def predict_price(wineType : str, fixedAcidity, volatileAcidity, citricAcid, res
         price = fit_white[0] * rating + fit_white[1]
         price = price if price >= 3 else 3
         return price, rating
-        # print(prices.loc[(prices['Rating'] > rating - 0.5) & (prices['Rating'] < rating + 0.5)]['Price'])
-        return prices.loc[(prices['Rating'] > rating - 0.5) & (prices['Rating'] < rating + 0.5)]['Price'].mean(), rating
-
 
 # predict_price('white',0,0,0,0,0,0,0,0,0,0,0)
