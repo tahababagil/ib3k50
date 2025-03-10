@@ -21,13 +21,20 @@ def predict_price(wineType : str, fixedAcidity, volatileAcidity, citricAcid, res
     if wineType.strip() == "red":
         model = pd.read_pickle("red_tree_quality.pkl")
         rating = model.predict(df)[0]
-        prices = pd.read_pickle("red_price.pkl")
-        return prices.loc[(prices['Rating'] > rating - 0.2) & (prices['Rating'] < rating + 0.2)]['Price'].mean(), rating
+        # prices = pd.read_pickle("red_price.pkl")
+        fit_red = pd.read_pickle("red_pred.pkl")
+        price = fit_red[0] * rating + fit_red[1]
+        price = price if price >= 3 else 3
+        return price, rating
     else:
         model = pd.read_pickle("white_tree_quality.pkl")
         rating = model.predict(df)[0]
-        prices = pd.read_pickle("white_price.pkl")
-        print(prices.loc[(prices['Rating'] > rating - 0.5) & (prices['Rating'] < rating + 0.5)]['Price'])
+        # prices = pd.read_pickle("white_price.pkl")
+        fit_white = pd.read_pickle("white_pred.pkl")
+        price = fit_white[0] * rating + fit_white[1]
+        price = price if price >= 3 else 3
+        return price, rating
+        # print(prices.loc[(prices['Rating'] > rating - 0.5) & (prices['Rating'] < rating + 0.5)]['Price'])
         return prices.loc[(prices['Rating'] > rating - 0.5) & (prices['Rating'] < rating + 0.5)]['Price'].mean(), rating
 
 
