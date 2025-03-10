@@ -21,7 +21,7 @@ def index():
             sulphates = float(request.form.get("sulphates", 0))
             alcohol = float(request.form.get("alcohol", 0))
             predicted_price, quality = predict_price(wineType, fixedAcidity, volatileAcidity, citricAcid, residualSugar, chlorides, freeSulfurDioxide, totalSulfurDioxide, density, pH, sulphates, alcohol)
-            quality = round(quality,1)
+            quality = round(quality / 2,1)
             predicted_price = round(predicted_price,2)
         except Exception as e:
             predicted_price = "Error: invalid input"
